@@ -1,0 +1,43 @@
+/*
+ * @lc app=leetcode.cn id=724 lang=csharp
+ *
+ * [724] 寻找数组的中心下标
+ */
+
+// @lc code=start
+public class Solution
+{
+    public int PivotIndex(int[] nums)
+    {
+        int sum = nums.Sum();
+
+        int currentSum = 0;
+        for (int i = 0; i < nums.Length; i++)
+        {
+            if (currentSum * 2 + nums[i] == sum) return i;
+            currentSum += nums[i];
+        }
+        return -1;
+    }
+}
+// @lc code=end
+
+public class Solution1
+{
+    public int PivotIndex(int[] nums)
+    {
+        int[] sum = new int[nums.Length + 1];
+
+        sum[0] = 0;
+        for (int i = 0; i < nums.Length; i++)
+        {
+            sum[i + 1] = sum[i] + nums[i];
+        }
+
+        for (int i = 0; i < nums.Length; i++)
+        {
+            if (2 * sum[i] + nums[i] == sum[^1]) return i;
+        }
+        return -1;
+    }
+}
